@@ -1,0 +1,87 @@
+@charset "utf-8";
+html,body,h1,h2,h3,div{margin:0;padding:0}
+html,body{height:100%;-webkit-text-size-adjust:none}
+
+.btn_vue{
+  position: fixed;
+  right: 20px;
+  top: 30px;
+  width: 40px;
+  height: 40px;
+  border: 2px solid #42b983;
+  background: #425f7b;
+  text-decoration: none;
+  text-align: center;
+  font-size: 14px;
+  color: #fff;
+}
+
+.ex{
+  margin: 30px auto;
+}
+/*like*/
+
+.ex_like{
+  display: flex;
+  align-items:center;
+  justify-content: space-between;
+  width: 400px;
+  padding: 10px 30px;
+  background: #fff;
+  border: 1px solid #e5e5e5;
+}
+
+.user_info{
+  display: flex;
+  align-items:center;
+}
+
+.user_thumb{
+  overflow: hidden;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  margin-left: -8px;
+  background: #eee;
+  border: 1px solid #e5e5e5;
+  border-radius: 50%;
+}
+
+.user_thumb:first-child{
+  margin-left:0;
+}
+
+.user_thumb img{
+  width: 100%; 
+  height: auto;
+}
+
+.user_info span{
+  padding-left: 4px;
+  font-size: 12px;
+  color: #666;
+}
+.btn{
+  overflow: hidden;
+  width: 20px;
+  height: 20px;
+  margin: 0 5px;
+  border: 0;
+  text-indent: -999px;
+}
+
+.btn_like{
+  background:url('images/ico_like_off.png');
+  background-size: cover;
+}
+
+.btn_like.on{
+  background:url('images/ico_like_on.png');
+  background-size: cover;
+}
+
+.num{
+  padding-left: 5px;
+  font-size: 16px;
+  color:#000;
+}
