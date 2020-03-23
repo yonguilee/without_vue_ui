@@ -124,13 +124,13 @@
         &lt;div class="user_thumb" v-for="user in userList.slice(0,`${maxIndex}`)" :key="user.index"&gt;
           &lt;img :src="user.photo" :alt="`${user.name} 프로필 사진`"&gt;
         &lt;/div&gt;
-        &lt;span v-show="userList.length&gt;maxIndex"&gt;외 {{totalLikeNum-maxIndex}}명&lt;/span&gt;
+        &lt;span v-show="userList.length&gt;maxIndex"&gt;외 {{userList.length-maxIndex}}명&lt;/span&gt;
       &lt;/div&gt;
   
       &lt;div class="count_info"&gt;
           &lt;button type="button" class="btn like_off" v-show="!likeStatus" @click="changeStatus()"&gt;좋아요&lt;/button&gt;
           &lt;button type="button" class="btn like_on" v-show="likeStatus" @click="changeStatus()"&gt;좋아요 취소&lt;/button&gt;
-          &lt;span class="num"&gt;{{totalLikeNum}}&lt;/span&gt;
+          &lt;span class="num"&gt;{{userList.length}}&lt;/span&gt;
       &lt;/div&gt;
     &lt;/div&gt;
   &lt;/template&gt;
@@ -142,7 +142,6 @@
       return {
         likeStatus: false,
         maxIndex: 3,
-        totalLikeNum: '',
         myInfo : {name: '나다', photo: 'images/img_user1.png'},
         userList: [
           {name: '브라운', photo: 'images/img_user1.png'},
@@ -164,11 +163,7 @@
             this.userList.splice(myIndex,1);
           }
         }
-        this.totalLikeNum = this.userList.length;
       }
-    },
-    mounted() {
-      this.totalLikeNum = this.userList.length;
     }
   }
   &lt;/script&gt;
