@@ -6,130 +6,190 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>Like component</title>
 <link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/agate.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/an-old-hope.min.css">
 </head>
 <body>
-  <a href="https://yonguilee.github.io/vue_ui/" class="btn_vue">Vue ver</a>
   <div class="ex ex_like">
     <div class="user_info">
-        <!--[D] .user_thumb 최대 3개 노출 가능 -->
-        <div class="user_thumb">
-          <img src="" alt="">
-        </div>
-        <span class="txt_user_info" style="display:none;">외 <span>N</span>명</span>
+      <!--[D] .user_thumb 최대 3개 노출 가능 -->
+      <div class="user_thumb">
+        <img src="" alt="">
       </div>
-      
-      <div class="count_info">
-        <!--[D] .btn_like 클릭시 on 클래스 추가 & '좋아요 취소'로 텍스트 변경 -->
-        <button type="button" class="btn btn_like">좋아요</button>
-        <span class="num">0</span>
+      <span class="txt_user_info" style="display:none;">외 <span>N</span>명</span>
+    </div>
+    
+    <div class="count_info">
+      <!--[D] .btn_like 클릭시 on 클래스 추가 & '좋아요 취소'로 텍스트 변경 -->
+      <button type="button" class="btn btn_like">좋아요</button>
+      <span class="num">0</span>
     </div>
   </div>
   
   <div class="code_wrap">
-    <pre>
-      <code class="html">
-      &lt;div class="ex ex_like"&gt;
-        &lt;div class="user_info"&gt;
-          &lt;!--[D] .user_thumb 최대 3개 노출 가능 --&gt;
-          &lt;div class="user_thumb"&gt;
-            &lt;img src="" alt=""&gt;
-          &lt;/div&gt;
-          &lt;span class="txt_user_info" style="display:none;"&gt;외 &lt;span&gt;N&lt;/span&gt;명&lt;/span&gt;
+    <div class="code">
+      <strong>without Vue</strong>
+      <pre>
+        <code class="html">
+  &lt;body&gt;
+    &lt;div class="ex ex_like"&gt;
+      &lt;div class="user_info"&gt;
+        &lt;!--[D] .user_thumb 최대 3개 노출 가능 --&gt;
+        &lt;div class="user_thumb"&gt;
+          &lt;img src="" alt=""&gt;
         &lt;/div&gt;
-          
-        &lt;div class="count_info"&gt;
-          &lt;!--[D] .btn_like 클릭시 on 클래스 추가 & '좋아요 취소'로 텍스트 변경 --&gt;
-          &lt;button type="button" class="btn btn_like"&gt;좋아요&lt;/button&gt;
-          &lt;span class="num"&gt;0&lt;/span&gt;
-        &lt;/div&gt;
+        &lt;span class="txt_user_info" style="display:none;"&gt;외 &lt;span&gt;N&lt;/span&gt;명&lt;/span&gt;
       &lt;/div&gt;
-      </code>
-    </pre>
+      
+      &lt;div class="count_info"&gt;
+        &lt;!--[D] .btn_like 클릭시 on 클래스 추가 & '좋아요 취소'로 텍스트 변경 --&gt;
+        &lt;button type="button" class="btn btn_like"&gt;좋아요&lt;/button&gt;
+        &lt;span class="num"&gt;0&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
     
-    <pre>
-      <code class="javascript">
-        let userList = [
-              {name: '브라운', photo: 'images/img_user1.png'},
-              {name: '피자', photo: 'images/img_user2.png'},
-              {name: '천혜향', photo: 'images/img_user3.png'},
-              {name: '퐁듀', photo: 'images/img_user1.png'}
-            ],
-            myInfo = {name: '나다', photo: 'images/img_user1.png'},
-            likeStatus = false;
-
-        $(document).ready(function(){
-          updateUserThumb();
-          updateLikeCount();
-        });
-
-        //썸네일 업데이트 
-        function updateUserThumb(){
-          if(userList){
-            $('.user_info .user_thumb').remove(); //초기화
-
-            $.each(userList, function(index, user){ //썸네일 생성
-              $('.user_info').prepend(`&lt;div class="user_thumb"&gt;&lt;img src="${user.photo}" alt="${user.name}의 프로필사진"&gt;&lt;/div&gt;`);
-              if(index==2) return false; //썸네일은 최대 3개까지 표시 
-            })
-          }     
-        }
-
-        //좋아요 수 업데이트 
-        function updateLikeCount(){
-          let totalNum = userList.length;
-          $('.count_info .num').text(totalNum);
-
-          //썸네일 옆 숫자 
-          let showedThumbNum = $('.user_info .user_thumb').length;
-          if(showedThumbNum < userList.length){//좋아요 누른 사람이 최대 썸네일 수인 3보다 많을 경우에만 노출
-            $('.user_info .txt_user_info').show();
-            let lastTotalNum = totalNum - showedThumbNum;
-            $('.user_info .txt_user_info span').text(lastTotalNum);
-          }
-
-        }
-
-        $('.btn_like').click(function(){
-          likeStatus = !likeStatus;
+    &lt;script&gt;   
+      let likeStatus = false,
+          myInfo = {name: '나다', photo: 'images/img_user1.png'},
+          userList = [
+            {name: '브라운', photo: 'images/img_user1.png'},
+            {name: '피자', photo: 'images/img_user2.png'},
+            {name: '천혜향', photo: 'images/img_user3.png'},
+            {name: '퐁듀', photo: 'images/img_user1.png'}
+          ];
+      
+      //썸네일 업데이트 
+      function updateUserThumb(){
+        if(userList){
+          $('.user_info .user_thumb').remove(); //초기화
           
-          if(likeStatus){//좋아요를 누른다면, 
-            $(this).addClass('on').text('좋아요 취소');
-
-            userList.push(myInfo);//내 정보 좋아요 업데이트 
+          $.each(userList, function(index, user){ //썸네일 생성
+            $('.user_info').prepend(`&lt;div class="user_thumb"&gt;&lt;img src="${user.photo}" alt="${user.name}의 프로필사진"&gt;&lt;/div&gt;`);
+            if(index==2) return false; //썸네일은 최대 3개까지 표시 
+          })
+        }     
+      }
+      
+      //좋아요 업데이트
+      function updateLikeCount(){
+        let totalNum = userList.length;
+        $('.count_info .num').text(totalNum);
+        
+        //썸네일 옆 숫자 
+        let showedThumbNum = $('.user_info .user_thumb').length;
+        if(showedThumbNum &lt; userList.length){//좋아요 누른 사람이 최대 썸네일 수인 3보다 많을 경우에만 노출
+          $('.user_info .txt_user_info').show();
+          let lastTotalNum = totalNum - showedThumbNum;
+          $('.user_info .txt_user_info span').text(lastTotalNum);
+        }
+        
+      }
+      
+      $('.btn_like').click(function(){
+        likeStatus = !likeStatus;
+        
+        if(likeStatus){//좋아요를 누른다면, 
+          $(this).addClass('on').text('좋아요 취소');
+          
+          userList.push(myInfo);//내 정보 좋아요 업데이트 
+          updateLikeCount();
+        }else{
+          $(this).removeClass('on').text('좋아요');
+          
+          let myIndex = userList.indexOf(myInfo);
+          if(myIndex&gt;-1){//좋아요 취소한다면,
+            userList.splice(myIndex,1);
             updateLikeCount();
-          }else{
-            $(this).removeClass('on').text('좋아요');
-
-            let myIndex = userList.indexOf(myInfo);
-            if(myIndex>-1){//내 정보 좋아요 취소 업데이트
-              userList.splice(myIndex,1);
-              updateLikeCount();
-            }
           }
-        });
-      </code>
-    </pre>
+        }
+      });
+
+      $(document).ready(function(){
+        updateUserThumb();
+        updateLikeCount();
+      });
+    &lt;/script&gt;
+  &lt;/body&gt;
+        </code>
+      </pre>
+    </div>
+    
+    <div class="code vue">
+      <strong>with Vue</strong>
+      <a href="https://yonguilee.github.io/vue_ui/" class="btn_vue">Check the view!</a>
+      <pre>
+        <code class="html">
+  &lt;template&gt;
+    &lt;div class="ex ex_like"&gt;
+      &lt;div class="user_info"&gt;
+        &lt;div class="user_thumb" v-for="user in userList.slice(0,`${maxIndex}`)" :key="user.index"&gt;
+          &lt;img :src="user.photo" :alt="`${user.name} 프로필 사진`"&gt;
+        &lt;/div&gt;
+        &lt;span v-show="userList.length&gt;maxIndex"&gt;외 {{totalLikeNum-maxIndex}}명&lt;/span&gt;
+      &lt;/div&gt;
+  
+      &lt;div class="count_info"&gt;
+          &lt;button type="button" class="btn like_off" v-show="!likeStatus" @click="changeStatus()"&gt;좋아요&lt;/button&gt;
+          &lt;button type="button" class="btn like_on" v-show="likeStatus" @click="changeStatus()"&gt;좋아요 취소&lt;/button&gt;
+          &lt;span class="num"&gt;{{totalLikeNum}}&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/template&gt;
+  
+  &lt;script&gt;
+  export default {
+    name: 'Like',
+    data() {
+      return {
+        likeStatus: false,
+        maxIndex: 3,
+        totalLikeNum: '',
+        myInfo : {name: '나다', photo: 'images/img_user1.png'},
+        userList: [
+          {name: '브라운', photo: 'images/img_user1.png'},
+          {name: '피자', photo: 'images/img_user2.png'},
+          {name: '천혜향', photo: 'images/img_user3.png'},
+          {name: '퐁듀', photo: 'images/img_user1.png'}
+        ]
+      };
+    },
+    methods: {
+      changeStatus() {
+        this.likeStatus=!this.likeStatus;
+  
+        if(this.likeStatus){ //좋아요를 누른다면,
+          this.userList.push(this.myInfo);
+        }else{
+          let myIndex = this.userList.indexOf(this.myInfo);
+          if(myIndex&gt;-1){//좋아요 취소한다면,
+            this.userList.splice(myIndex,1);
+          }
+        }
+        this.totalLikeNum = this.userList.length;
+      }
+    },
+    mounted() {
+      this.totalLikeNum = this.userList.length;
+    }
+  }
+  &lt;/script&gt;
+        </code>
+      </pre>
+    </div>
+
   </div>
 
   <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script>
   <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
   <script>
-
-    let userList = [
+    let likeStatus = false,
+        myInfo = {name: '나다', photo: 'images/img_user1.png'},
+        userList = [
           {name: '브라운', photo: 'images/img_user1.png'},
           {name: '피자', photo: 'images/img_user2.png'},
           {name: '천혜향', photo: 'images/img_user3.png'},
           {name: '퐁듀', photo: 'images/img_user1.png'}
-        ],
-        myInfo = {name: '나다', photo: 'images/img_user1.png'},
-        likeStatus = false;
-
-    $(document).ready(function(){
-      updateUserThumb();
-      updateLikeCount();
-    });
+        ];
 
     //썸네일 업데이트 
     function updateUserThumb(){
@@ -170,11 +230,16 @@
         $(this).removeClass('on').text('좋아요');
 
         let myIndex = userList.indexOf(myInfo);
-        if(myIndex>-1){//내 정보 좋아요 취소 업데이트
+        if(myIndex>-1){//좋아요 취소한다면,
           userList.splice(myIndex,1);
           updateLikeCount();
         }
       }
+    });
+
+    $(document).ready(function(){
+      updateUserThumb();
+      updateLikeCount();
     });
   </script>
 </body>

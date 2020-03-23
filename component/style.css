@@ -3,11 +3,9 @@ html,body,h1,h2,h3,div{margin:0;padding:0}
 html,body{height:100%;-webkit-text-size-adjust:none}
 
 .btn_vue{
-  position: fixed;
-  right: 20px;
-  top: 30px;
-  width: 40px;
-  height: 40px;
+  display:inline-block;
+  margin-left: 30px;
+  padding: 5px 10px;
   border: 2px solid #42b983;
   background: #425f7b;
   text-decoration: none;
@@ -19,6 +17,20 @@ html,body{height:100%;-webkit-text-size-adjust:none}
 .ex{
   margin: 30px auto;
 }
+
+.code_wrap {
+  display: flex;
+  justify-content: center;
+}
+.code_wrap strong{
+  font-size: 24px;
+}
+
+.code_wrap .code.vue{
+  margin-left: 10px;
+}
+
+pre{margin:0;}
 /*like*/
 
 .ex_like{
