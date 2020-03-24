@@ -15,6 +15,7 @@
       <div class="user_thumb">
         <img src="" alt="">
       </div>
+      <!--[D] .user_thumb 이 3개일 경우 display:block 처리 -->
       <span class="txt_user_info" style="display:none;">외 <span>N</span>명</span>
     </div>
     
@@ -37,6 +38,7 @@
         &lt;div class="user_thumb"&gt;
           &lt;img src="" alt=""&gt;
         &lt;/div&gt;
+        &lt;!--[D] .user_thumb 이 3개일 경우 display:block 처리 --&gt;
         &lt;span class="txt_user_info" style="display:none;"&gt;외 &lt;span&gt;N&lt;/span&gt;명&lt;/span&gt;
       &lt;/div&gt;
       
@@ -71,17 +73,14 @@
       
       //좋아요 업데이트
       function updateLikeCount(){
-        let totalNum = userList.length;
-        $('.count_info .num').text(totalNum);
-        
+        $('.count_info .num').text(userList.length);
+  
         //썸네일 옆 숫자 
-        let showedThumbNum = $('.user_info .user_thumb').length;
-        if(showedThumbNum &lt; userList.length){//좋아요 누른 사람이 최대 썸네일 수인 3보다 많을 경우에만 노출
+        let maxIndex = 3;
+        if(userList.length > 3){//좋아요 누른 사람이 최대 썸네일 수인 3보다 많을 경우에만 노출
           $('.user_info .txt_user_info').show();
-          let lastTotalNum = totalNum - showedThumbNum;
-          $('.user_info .txt_user_info span').text(lastTotalNum);
+          $('.user_info .txt_user_info span').text(userList.length - 3);
         }
-        
       }
       
       $('.btn_like').click(function(){
@@ -91,16 +90,15 @@
           $(this).addClass('on').text('좋아요 취소');
           
           userList.push(myInfo);//내 정보 좋아요 업데이트 
-          updateLikeCount();
         }else{
           $(this).removeClass('on').text('좋아요');
           
           let myIndex = userList.indexOf(myInfo);
           if(myIndex&gt;-1){//좋아요 취소한다면,
             userList.splice(myIndex,1);
-            updateLikeCount();
           }
         }
+        updateLikeCount();
       });
 
       $(document).ready(function(){
@@ -200,17 +198,14 @@
 
     //좋아요 업데이트
     function updateLikeCount(){
-      let totalNum = userList.length;
-      $('.count_info .num').text(totalNum);
+      $('.count_info .num').text(userList.length);
 
       //썸네일 옆 숫자 
-      let showedThumbNum = $('.user_info .user_thumb').length;
-      if(showedThumbNum < userList.length){//좋아요 누른 사람이 최대 썸네일 수인 3보다 많을 경우에만 노출
+      let maxIndex = 3;
+      if(userList.length > maxIndex){//좋아요 누른 사람이 최대 썸네일 수인 3보다 많을 경우에만 노출
         $('.user_info .txt_user_info').show();
-        let lastTotalNum = totalNum - showedThumbNum;
-        $('.user_info .txt_user_info span').text(lastTotalNum);
+        $('.user_info .txt_user_info span').text(userList.length - maxIndex);
       }
-
     }
 
     $('.btn_like').click(function(){
@@ -220,16 +215,15 @@
         $(this).addClass('on').text('좋아요 취소');
 
         userList.push(myInfo);//내 정보 좋아요 업데이트 
-        updateLikeCount();
       }else{
         $(this).removeClass('on').text('좋아요');
 
         let myIndex = userList.indexOf(myInfo);
         if(myIndex>-1){//좋아요 취소한다면,
           userList.splice(myIndex,1);
-          updateLikeCount();
         }
       }
+      updateLikeCount();
     });
 
     $(document).ready(function(){
